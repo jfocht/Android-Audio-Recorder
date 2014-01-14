@@ -95,31 +95,4 @@ public class AudioClipDatabase extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(selectQuery, null);
     }
-
-    public List<AudioClip> getAllAudioClips() {
-        List<AudioClip> clipList = new ArrayList<AudioClip>();
-        Cursor cursor = getAudioClipCursor();
-        if (cursor.moveToFirst()) {
-            do {
-                clipList.add(extractAudioClip(cursor));
-            } while (cursor.moveToNext());
-        }
-        return clipList;
-    }
-
-    private AudioClip extractAudioClip(Cursor cursor) {
-        Date date;
-        try {
-            date = SQLITE_DATE_FORMAT.parse(cursor.getString(4));
-        } catch (ParseException e) {
-            // Log error
-            date = null;
-        }
-        return new AudioClip(
-                Integer.parseInt(cursor.getString(0)),
-                cursor.getString(1),
-                cursor.getString(2),
-                Integer.parseInt(cursor.getString(3)),
-                date);
-    }
 }
