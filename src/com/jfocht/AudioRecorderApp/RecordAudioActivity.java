@@ -216,8 +216,6 @@ public class RecordAudioActivity extends Activity
             AudioClipDatabase.KEY_CREATED, AudioClipDatabase.KEY_DURATION};
         int[] toViews = {R.id.name, R.id.date, R.id.duration};
 
-        // Create an empty adapter we will use to display the loaded data.
-        // We pass null for the cursor, then update it in onLoadFinished()
         audioClipAdapter = new SimpleCursorAdapter(this, R.layout.clip, null,
                 fromColumns, toViews, 0);
         audioClipAdapter.setViewBinder(audioListViewBinder);
